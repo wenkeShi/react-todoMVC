@@ -42,11 +42,7 @@ class TopNavRight extends Component{
 }
 
 class TopNavBuyCar extends Component{
-	/*getInitialState(){
-		return {
-			goodCount:0
-		}
-	} ES6中不能这样用*/
+	
 	constructor(props){
 		super(props);
 		this.state={goodCount:0};
