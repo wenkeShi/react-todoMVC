@@ -49,7 +49,7 @@ import './itemstyle.css';
         console.log('render --Item');
         return (
             <div className="item" key={this.props.id}>
-                <input type="checkbox" checked={this.props.completed} className="completed-button" onClick={this.handleClick}/>
+                <input type="checkbox" checked={this.props.completed} className="completed-button" onChange={this.handleClick}/>
                 <input className="content-input" onDoubleClick={this.handleDoubleClick} readOnly={this.state.readOnly}
                        value={this.props.content} onChange={this.handleChange} onBlur={this.handleBlur}></input>
                 <button className="delete-item" onClick={this.handleClick}>X</button>
@@ -62,6 +62,9 @@ import './itemstyle.css';
 export default class ItemList extends Component{
     constructor(props){
         super(props);
+        this.state={
+            nodesLength : 0
+        }
     }
 
 
@@ -70,7 +73,7 @@ export default class ItemList extends Component{
         let itemList=this.props.list;
         let isShowAll=this.props.controlSet.showAll;
         let isShowActive = this.props.controlSet.showActive;
-        let isShowCompleted=this.controlSet.showCompleted;
+        let isShowCompleted=this.props.controlSet.showCompleted;
         let nodes=[];
         if(isShowAll){
             nodes=itemList.map((item)=>{
@@ -93,9 +96,13 @@ export default class ItemList extends Component{
                 }
             }
         }
-        return <div>
+      /*  this.props.showNodesLength(nodes.length);*/
+        return <div >
                 {nodes}
             </div>;
+    }
+    componentDidMount(){
+
     }
 }
 
