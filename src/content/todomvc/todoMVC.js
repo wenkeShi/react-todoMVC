@@ -147,6 +147,12 @@ export default class TodoMVC extends  Component{
         let list =this.state.list;
         let activeCounter=this.state.activeCounter;
         let counter=(status==='showAll')? list.length :(status==='showActive' ? activeCounter : list.length-activeCounter);
+        let activeItems=[];    //优化了status判断，在render方法里面判断而不是传到组件ItemList之后判断
+        let completedItems=[];
+        list.forEach((item)=>{
+            item.active?activeItems.push(item):completedItems.push(item);
+        });
+        list=(status==='showActive')? activeItems :(status==='showCompleted' ? completedItems : list);
         return(
             <div>
                 <Input  onHandleKeyDown={this.handleKeyDown} />

@@ -75,11 +75,12 @@ export default class ItemList extends Component{
         let isShowCompleted=this.props.controlSet.showCompleted;*/
         let status=this.props.status;
         let nodes=[];
-        if(/*isShowAll*/status =='showAll'){
+        //if(/*isShowAll*/status =='showAll'){
             nodes=itemList.map((item)=>{
                 return <Item content={item.value} key={item.id} id={item.id} completed={item.completed} onItemChange={this.props.onItemChange} onHandleItemClick={this.props.onHandleItemClick}/>
             });
-        }else if(/*isShowActive*/ status=='showActive'){
+        //}
+       /* else if(isShowActive status=='showActive'){
             for(let i=0;i<itemList.length;i++){
                 let item=itemList[i];
                 if(item.active){
@@ -95,7 +96,7 @@ export default class ItemList extends Component{
                     nodes.push(itemNode);
                 }
             }
-        }
+        }*/
       /*  this.props.showNodesLength(nodes.length);*/
         return <div >
                 {nodes}
