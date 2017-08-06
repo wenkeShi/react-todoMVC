@@ -11,17 +11,19 @@ export default class TodoMVC extends  Component{
         super(props);
         this.state={
             list : [],
-            nodesLength: 0,
-            controlSet : {
+           /* controlSet : {
                 showAll : true,
                 showActive : false,
                 showCompleted : false
-            }
+            },*/
+            status : 'showAll',
+            activeCounter : 0,  //active item的计数器
+           // counter : 0        
         };
         this.handleItemChange=this.handleItemChange.bind(this);
         this.handleKeyDown=this.handleKeyDown.bind(this);
         this.handleItemClick=this.handleItemClick.bind(this);
-        this.showNodesLength=this.showNodesLength.bind(this);
+        //this.showNodesLength=this.showNodesLength.bind(this);
         this.handleControlBarClick=this.handleControlBarClick.bind(this);
         this.handleClearCompleted=this.handleClearCompleted.bind(this);
     }
@@ -39,13 +41,14 @@ export default class TodoMVC extends  Component{
             id :this.genNonDuplicateID()
         };
         list.push(item);
-        this.setState({
-            list : list
-        });
+        this.setState((prevState)=>({
+            list : list,
+            activeCounter : prevState.activeCounter+1
+        }));
     }
     handleItemChange(value ,id){       //编辑item时触发  改变item的值
         let list=this.state.list;
-        console.log(list);
+        /*console.log(list);*/
         list=list.map((item)=>{
             if(item.id===id){
                 item.value=value;
@@ -65,11 +68,14 @@ export default class TodoMVC extends  Component{
 
     handleItemClick(id,e){            //点击item上的两个按钮时触发
         let list = this.state.list;
+        let activeCounter=this.state.activeCounter;
         if(e.target.type==='checkbox'){   //点击单选框触发
             let isChecked=e.target.checked;
             for (let i = 0; i <= list.length; i++) {
                 if (list[i].id === id) {
-                    list[i].completed=isChecked;
+                    /*console.log(isChecked);*/
+                    isChecked?--activeCounter:activeCounter++;
+                    list[i].completed=isChecked;  //勾选时减一没勾选加一
                     list[i].active=!isChecked;
                     break;
                 }
@@ -77,35 +83,47 @@ export default class TodoMVC extends  Component{
         }else {      //item删除按钮处理事件
             for (let i = 0; i <= list.length; i++) {
                 if (list[i].id === id) {
-                    list.splice(i, 1);
+                    list[i].active ? activeCounter-- : null;
+                    list.splice(i, 1)
                     break;
                 }
             }
         }
         this.setState({
-            list : list
+            list : list,
+            activeCounter : activeCounter
         });
     }
-    showNodesLength(length) {
+ /*   showNodesLength(length) {
         this.setState({nodesLength: length});
-    }
+    }*/
     handleControlBarClick(e){                  //点击控制栏按钮时触发
-        let controlSet=this.state.controlSet;
+        /*let controlSet=this.state.controlSet*/;
+       // let counter=this.state.counter;
+        let status=this.state.status;
         if(e.target.value==='showAll'){
-            controlSet.showAll=true;
+            /*controlSet.showAll=true;
             controlSet.showActive=false;
-            controlSet.showCompleted=false;
+            controlSet.showCompleted=false;*/
+           // counter=this.state.list.length;
+            status='showAll';
         }else if(e.target.value==='showActive'){
-            controlSet.showActive=true;
+            /*controlSet.showActive=true;
             controlSet.showAll=false;
-            controlSet.showCompleted=false;
+            controlSet.showCompleted=false;*/
+           // counter=this.state.activeCounter;
+            status='showActive';
         }else if(e.target.value==='showCompleted'){
-            controlSet.showCompleted=true;
+          /*  controlSet.showCompleted=true;
             controlSet.showAll=false;
-            controlSet.showActive=false;
+            controlSet.showActive=false;*/
+            //ounter=this.state.list.length-this.state.activeCounter;
+            status='showCompleted';
         }
         this.setState({
-            controlSet: controlSet
+            /*controlSet: controlSet,*/
+            //counter :counter,
+            status : status
         });
     }
 
@@ -122,17 +140,19 @@ export default class TodoMVC extends  Component{
             list :temp
         });
     }
-
-
     render(){
         //console.log(this.state.list);
-        console.log('render --todomvc');
+        //console.log('render --todomvc');
+        let status=this.state.status;
+        let list =this.state.list;
+        let activeCounter=this.state.activeCounter;
+        let counter=(status==='showAll')? list.length :(status==='showActive' ? activeCounter : list.length-activeCounter);
         return(
             <div>
                 <Input  onHandleKeyDown={this.handleKeyDown} />
-                <ItemList list={this.state.list} onItemChange={this.handleItemChange} onHandleItemClick={this.handleItemClick}
-                          controlSet={this.state.controlSet} showNodesLength={this.showNodesLength}/>
-                <ControlBar onControlBarClick={this.handleControlBarClick} onClearCompleted={this.handleClearCompleted} />
+                <ItemList list={list} onItemChange={this.handleItemChange} onHandleItemClick={this.handleItemClick}
+                          /*controlSet={this.state.controlSet}*/ status={status}/>
+                <ControlBar counter={counter} onControlBarClick={this.handleControlBarClick} onClearCompleted={this.handleClearCompleted} />
             </div>
         );
     }
