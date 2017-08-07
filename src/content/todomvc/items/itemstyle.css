@@ -1,42 +1,60 @@
 .item {
-    width: 550px;
+    width: 500px;
     height:58px;
     border:0;
     border-bottom: 1px solid #ededed;
     position: relative;
     left:0;
     top:0;
+    margin: auto;
+
 }
 
 .item input{
     display: inline-block;
+    border:0;
+    width:460px;
 }
 
 .item .completed-button{
     width :40px;
     height: 40px;
-    margin: auto 0;
+    margin: 9px 0;
+    float: left;
 }
 
 .item .content-input{
    /* width:510px;*/
-    height:58px;
-    line-height:58px;
-    font-size:24px;
-}
+    height:55px;
+    font-size:20px;
+    float: left;
+    outline:none;
 
+}
+.item .content-input:focus.delete-item  {
+    display: none;
+}
 .item .delete-item{
     display: none;
+    border:0;
+    background-color: #fff;
     position: absolute;
     width:40px;
     height:40px;
-    margin:auto 10px;
+    margin: 10px 0;
     right:0;
     top:0;
+    outline:none;
 }
+
 
 .item:hover .delete-item{
     display: block;
+}
+
+.item .completed-button {
+    width:25px;
+
 }
 
 

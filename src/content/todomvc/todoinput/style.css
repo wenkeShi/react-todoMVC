@@ -1,0 +1,28 @@
+.input-box{
+    width:500px;
+    height: 50px;
+    border:0;
+    box-shadow: 0 1px 1px 1px #cccccc;
+    margin: 10px auto;
+}
+.input-box .show-button{
+    display: inline-block;
+    width:40px;
+    height: 50px;
+    padding:0;
+    border:0;
+    line-height: 50px;
+    text-align: center;
+}
+.input-box input{
+    width:460px;
+    height:50px;
+    border:0;
+    padding:0;
+    vertical-align: top;
+    font-size: 20px;;
+
+}
+.input-box input:focus{
+    outline:none;
+}

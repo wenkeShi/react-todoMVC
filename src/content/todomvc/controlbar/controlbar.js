@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/8/5.
  */
 import React,{Component} from 'react';
+import './style.css';
 
 export default class ControlBar extends Component{
     constructor(props){
@@ -18,14 +19,14 @@ export default class ControlBar extends Component{
     render(){
 
         return (
-            <div>
+            <div className="control-bar">
                 <span>{this.props.counter} items left</span>
-                <div>
+                <div className="show-bar">
                     <button onClick={this.handleClick} value="showAll">All</button>
                     <button onClick={this.handleClick} value="showActive">Active</button>
                     <button onClick={this.handleClick} value="showCompleted">Completed</button>
                 </div>
-                <button onClick={this.props.onClearCompleted } value="clearCompleted">Clear completed</button>
+                <button className="clear-button" onClick={this.props.onClearCompleted } value="clearCompleted">Clear completed</button>
             </div>
         );
     }

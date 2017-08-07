@@ -2,6 +2,7 @@
  * Created by Administrator on 2017/8/5.
  */
 import React,{Component} from 'react';
+import './style.css';
 
 export default class Input extends Component{
     constructor(props){
@@ -26,8 +27,8 @@ export default class Input extends Component{
     }
     render(){
 
-        return (<div>
-                <button>^</button>
+        return (<div className="input-box">
+                <i className="show-button">^</i>
                 <input value={this.state.value} onChange={this.handleChange} onKeyDown={this.handleKeyDown}></input>
             </div>
             );

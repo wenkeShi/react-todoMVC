@@ -1,0 +1,33 @@
+.control-bar{
+    width:500px;
+    margin:10px auto;
+}
+.control-bar .show-bar{
+    display: inline-block;
+}
+.control-bar .show-bar button{
+    background-color: #E8E8E8;
+    border:0;
+    display: inline-block;
+    width:80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin:5px 10px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+.control-bar .show-bar button:focus{
+    border-radius:5px;
+}
+.control-bar .clear-button{
+    display: inline-block;
+    border:0;
+    cursor: pointer;
+    background-color: #FFFFFF;
+}
+.control-bar .clear-button:hover{
+    text-decoration: underline;
+    color: #abcdef;
+}
