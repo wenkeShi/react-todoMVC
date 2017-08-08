@@ -16,17 +16,22 @@
     width:460px;
 }
 
-.item .completed-button{
+.item .completed-button.iconfont{
     width :40px;
     height: 40px;
     margin: 9px 0;
     float: left;
+    font-family: 'iconfont' !important;
+    font-style: normal;
+    font-size: 35px;
+    line-height: 40px;
+    color: #cccccc;
 }
 
 .item .content-input{
    /* width:510px;*/
     height:55px;
-    font-size:20px;
+    font-size:25px;
     float: left;
     outline:none;
 
@@ -45,6 +50,7 @@
     right:0;
     top:0;
     outline:none;
+    font-family: 'iconfont' !important;
 }
 
 

@@ -17,9 +17,16 @@
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
+    cursor: pointer;
 }
 .control-bar .show-bar button:focus{
-    border-radius:5px;
+    outline: none;
+}
+
+.control-bar .show-bar button.active{
+    background-color: #EE5757;
+    color: #FFFFFF;
+    outline: none;
 }
 .control-bar .clear-button{
     display: inline-block;
@@ -30,4 +37,7 @@
 .control-bar .clear-button:hover{
     text-decoration: underline;
     color: #abcdef;
+}
+.control-bar span {
+    font-size:15px;
 }

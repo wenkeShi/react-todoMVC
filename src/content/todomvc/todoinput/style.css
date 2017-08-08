@@ -7,12 +7,16 @@
 }
 .input-box .show-button{
     display: inline-block;
+    font-style: normal;
     width:40px;
     height: 50px;
     padding:0;
     border:0;
     line-height: 50px;
     text-align: center;
+}
+.input-box .iconfont{
+    font-family: "iconfont" !important;
 }
 .input-box input{
     width:460px;

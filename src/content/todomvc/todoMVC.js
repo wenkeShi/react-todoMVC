@@ -18,7 +18,8 @@ export default class TodoMVC extends  Component{
             },*/
             status : 'showAll',
             activeCounter : 0,  //active item的计数器
-           // counter : 0        
+           // counter : 0
+            listStatus : true
         };
         this.handleItemChange=this.handleItemChange.bind(this);
         this.handleKeyDown=this.handleKeyDown.bind(this);
@@ -26,6 +27,7 @@ export default class TodoMVC extends  Component{
         //this.showNodesLength=this.showNodesLength.bind(this);
         this.handleControlBarClick=this.handleControlBarClick.bind(this);
         this.handleClearCompleted=this.handleClearCompleted.bind(this);
+        this.handleItemListDisplay=this.handleItemListDisplay.bind(this);
     }
     genNonDuplicateID (){    //生成唯一Id的函数
         let idStr=Date.now().toString();
@@ -66,17 +68,37 @@ export default class TodoMVC extends  Component{
         });
     }
 
-    handleItemClick(id,e){            //点击item上的两个按钮时触发
+    handleItemClick(id,e,type){            //点击item上的两个按钮时触发
         let list = this.state.list;
         let activeCounter=this.state.activeCounter;
-        if(e.target.type==='checkbox'){   //点击单选框触发
-            let isChecked=e.target.checked;
+        if(/*e.target.type==='checkbox'*/ type==='checkbox'){   //点击单选框触发
+            /*let isChecked=e.target.checked;*/
+            let isChecked=e.target.getAttribute('data-checked');  //得到的是个字符串，我日！！！！！！！
             for (let i = 0; i <= list.length; i++) {
                 if (list[i].id === id) {
                     /*console.log(isChecked);*/
+                    //注意这里和使用内置的checkbox时写法稍有区别。
+
+
+                    /*-----这是用内置checkbox的写法-------------
                     isChecked?--activeCounter:activeCounter++;
                     list[i].completed=isChecked;  //勾选时减一没勾选加一
                     list[i].active=!isChecked;
+                     -----这是用内置checkbox的写法-------------
+                    */
+
+
+                    //下面是自定义checkbox的写法         原因是自定义的checkbox,点击时传过来的是自定的data-checked，传过来之前它的值并没有发生变化，需要我们手动改变
+                    //而内置的checkbox,你点击之后checked马上就变了，传过来的是变了之后的checked.比如初始点击时，data-checked是false,而内置的checkbox的checked为true。
+                    console.log('------------------------------'+activeCounter);
+                    console.log('------------------------------'+isChecked);
+                    isChecked==='true' ? (activeCounter++) :(activeCounter--);
+                    console.log('------------------------------'+activeCounter);
+                    /*list[i].completed=!isChecked;
+                    list[i].active=isChecked;*/
+                    list[i].completed=! list[i].completed;
+                    list[i].active=!list[i].active;
+                    console.log('------------------------------'+isChecked);
                     break;
                 }
             }
@@ -140,6 +162,11 @@ export default class TodoMVC extends  Component{
             list :temp
         });
     }
+
+    handleItemListDisplay(iconStatus) {
+        this.setState({listStatus: iconStatus});
+    }
+
     render(){
         //console.log(this.state.list);
         //console.log('render --todomvc');
@@ -155,9 +182,9 @@ export default class TodoMVC extends  Component{
         list=(status==='showActive')? activeItems :(status==='showCompleted' ? completedItems : list);
         return(
             <div>
-                <Input  onHandleKeyDown={this.handleKeyDown} />
+                <Input  onHandleKeyDown={this.handleKeyDown} onItemListDisplay={this.handleItemListDisplay}/>
                 <ItemList list={list} onItemChange={this.handleItemChange} onHandleItemClick={this.handleItemClick}
-                          /*controlSet={this.state.controlSet}*/ status={status}/>
+                          /*controlSet={this.state.controlSet}*/ status={status} listStatus={this.state.listStatus}/>
                 <ControlBar counter={counter} onControlBarClick={this.handleControlBarClick} onClearCompleted={this.handleClearCompleted} />
             </div>
         );
