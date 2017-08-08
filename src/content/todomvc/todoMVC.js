@@ -45,7 +45,8 @@ export default class TodoMVC extends  Component{
         list.push(item);
         this.setState((prevState)=>({
             list : list,
-            activeCounter : prevState.activeCounter+1
+            activeCounter : prevState.activeCounter+1,
+            listStatus : true
         }));
     }
     handleItemChange(value ,id){       //编辑item时触发  改变item的值
