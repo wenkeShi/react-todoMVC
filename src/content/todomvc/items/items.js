@@ -64,7 +64,12 @@ import './style.css';
         let isCompeleted=this.props.completed;
         console.log('render --Item =============================='+isCompeleted);
 
-        {/*dangerouslySetInnerHTML={{__html : !compeletd ? '&#xe638;' : '&#xe632;'}}*/}
+        /*dangerouslySetInnerHTML={{__html : !compeletd ? '&#xe638;' : '&#xe632;'}}*/
+        /*dangerouslySetInnerHTML={{__html : !isCompeleted ? '&#xe638;' : '&#xe722;'}}*/
+
+        //let icon=(!isCompeleted) ? <span>&#xe638;</span> : <span>&#xe722;</span>;      //这样写虽然icon的unicode码不会被转义，
+        // 但是点击事件会被span元素获取，而不是被i标签获取，所以会出现点击时删除item的bug,这里涉及到事件的一系列属性，因为span并没有设置点击事件监听器，
+        // 这里还是调用了this.handleClick函数，而e.target却是span元素。等到了解事件之后再改成这样 <i>{icon}</i>
         return (
             <div className="item" key={this.props.id} >
                 { /*<input type="checkbox" checked={this.props.completed} className="completed-button" onChange={this.handleClick}/>*/}

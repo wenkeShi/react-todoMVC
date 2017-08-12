@@ -40,7 +40,7 @@ export default class Calculator extends React.Component{
     this.onCTemperatureChange=this.onCTemperatureChange.bind(this);
     this.onFTemperatureChange=this.onFTemperatureChange.bind(this);
   }
-   toCelsius(fahrenheit) {
+    toCelsius(fahrenheit) {
   return (fahrenheit - 32) * 5 / 9;
 }
 
